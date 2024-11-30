@@ -38,11 +38,11 @@
 
 <style>
 main {
-  width: 70%;
-  height: 60%;
-  margin: auto auto;
+  width: 35%;
+  height: 40%;
+  margin: 35px;
   background-color: #f8e3e4;
-  border: 15px solid #105353;
+  border: 5px solid #105353;
   border-radius: 15px;
   margin-top: 50px;
 }
@@ -51,8 +51,8 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 label {

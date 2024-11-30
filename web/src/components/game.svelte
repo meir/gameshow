@@ -1,10 +1,10 @@
 
 <script>
   import Team from "./team.svelte";
+  import AddUser from "./add_user.svelte";
 
-  export let me = {};
-  export let isHost = true;
-  export let teams = [[me]];
+  export let hideComponents = true;
+  export let teams = [[]];
 
   const addTeam = () => {
     teams = [...teams, []];
@@ -20,11 +20,15 @@
     teams[len - 2] = [...teams[len - 2], ...last];
     teams = teams.slice(0, len - 1);
   };
+
+  const addUser = (user) => {
+    teams[0] = [...teams[0], user];
+  };
 </script>
 
 <style>
 .host {
-  display: var(--is-host);
+  display: var(--hide-components);
 }
 
 #team-container {
@@ -57,10 +61,16 @@
 }
 </style>
 
-<div id="team-container" style="--is-host: {isHost ? "unset" : "none"}">
+<div>Toggle components: <input type="checkbox" bind:checked={hideComponents} /></div>
+{#if !hideComponents}
+  <AddUser submit={addUser} />
+{/if}
+<div id="team-container" style="--hide-components: {!hideComponents ? "unset" : "none"}">
   <div id="teams">
     {#each teams as _, index}
-      <Team isHost={isHost} teams={teams} team={index}/>
+      <Team hideComponents={hideComponents} team={teams[index]} setTeam={(e) => {
+        teams[index] = e.detail.items;
+      }}/>
     {/each}
   </div>
   <div id="team-controls" class="host">
